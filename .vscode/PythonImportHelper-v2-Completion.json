@@ -90,6 +90,15 @@
         "documentation": {}
     },
     {
+        "label": "folium",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "folium",
+        "description": "folium",
+        "detail": "folium",
+        "documentation": {}
+    },
+    {
         "label": "sc",
         "kind": 5,
         "importPath": "senne",
@@ -121,7 +130,7 @@
         "kind": 5,
         "importPath": "senne",
         "description": "senne",
-        "peekOfCode": "airport_schema = StructType([\n    StructField('airport', StringType(), True),\n    StructField('city', StringType(), True),\n    StructField('country', StringType(), True),\n    StructField('IATA', StringType(), True),\n    StructField('ICAO', StringType(), True),\n    StructField('lat', FloatType(), True),\n    StructField('lon', FloatType(), True),\n    StructField('alt', StringType(), True),\n    StructField('tz', StringType(), True),",
+        "peekOfCode": "airport_schema = StructType([\n    StructField('airport', StringType(), True),\n    StructField('city', StringType(), True),\n    StructField('country', StringType(), True),\n    StructField('IATA', StringType(), True),\n    StructField('ICAO', StringType(), True),\n    StructField('lat', FloatType(), True),\n    StructField('lon', FloatType(), True),\n    StructField('alt', StringType(), True),\n    StructField('TZ', FloatType(), True),",
         "detail": "senne",
         "documentation": {}
     },
@@ -130,7 +139,7 @@
         "kind": 5,
         "importPath": "senne",
         "description": "senne",
-        "peekOfCode": "airport_df = spark.read.csv(\n    \"./data/export_luchthavens.txt\", \n    header=True,\n    sep=\"\\t\",\n    multiLine=True,\n    schema=airport_schema\n)\n# CUSTOMERS DATAFRAME\ncustomers_schema = StructType([\n    StructField('id', IntegerType(), True),",
+        "peekOfCode": "airport_df = spark.read.csv(\n    \"./data/export_luchthavens.txt\", \n    # header=True,\n    sep=\"\\t\",\n    multiLine=True,\n    schema=airport_schema\n)\n# CUSTOMERS DATAFRAME\ncustomers_schema = StructType([\n    StructField('id', IntegerType(), True),",
         "detail": "senne",
         "documentation": {}
     },
@@ -166,7 +175,34 @@
         "kind": 5,
         "importPath": "senne",
         "description": "senne",
-        "peekOfCode": "weather_df = spark.read.csv(\n    \"./data/export_weer.txt\", \n    header=True,\n    sep=\"\\t\",\n    multiLine=True,\n    schema=weather_schema\n)\n# airport_df.show(3, False)\n# customers_df.show(3, False)\nweather_df.show(3, False)",
+        "peekOfCode": "weather_df = spark.read.csv(\n    \"./data/export_weer.txt\", \n    header=True,\n    sep=\"\\t\",\n    multiLine=True,\n    schema=weather_schema\n)\n# airport_df.show(3, False)\n# customers_df.show(3, False)\n# weather_df.show(3, False)",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "location_df",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "location_df = airport_df.dropna().collect()\nlocations = list(map(lambda r : [r['airport'], r['city'],(r['lat'], r['lon'])], location_df)) \nmap_tweets = folium.Map(location=[65,26], zoom_start=4)\nfor location_airport, location_city, location_coords in locations:\n    folium.Circle(location=location_coords,\n                  popup = f\"{location_city}: {location_airport}\",\n                  radius = 1000,\n                  color=\"crimson\",\n                  fill_color=\"crimson\",\n                  tooltip=location_airport",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "locations",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "locations = list(map(lambda r : [r['airport'], r['city'],(r['lat'], r['lon'])], location_df)) \nmap_tweets = folium.Map(location=[65,26], zoom_start=4)\nfor location_airport, location_city, location_coords in locations:\n    folium.Circle(location=location_coords,\n                  popup = f\"{location_city}: {location_airport}\",\n                  radius = 1000,\n                  color=\"crimson\",\n                  fill_color=\"crimson\",\n                  tooltip=location_airport\n                  ).add_to(map_tweets)",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "map_tweets",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "map_tweets = folium.Map(location=[65,26], zoom_start=4)\nfor location_airport, location_city, location_coords in locations:\n    folium.Circle(location=location_coords,\n                  popup = f\"{location_city}: {location_airport}\",\n                  radius = 1000,\n                  color=\"crimson\",\n                  fill_color=\"crimson\",\n                  tooltip=location_airport\n                  ).add_to(map_tweets)\nmap_tweets",
         "detail": "senne",
         "documentation": {}
     }

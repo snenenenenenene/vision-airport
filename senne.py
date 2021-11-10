@@ -6,6 +6,7 @@ from pyspark.sql.functions import col, desc, asc, lit
 from pyspark.sql import functions as F
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import rc
+import folium
 
 sc = SparkContext("local").getOrCreate()
 sqlContext = SQLContext(sc)
@@ -23,15 +24,15 @@ airport_schema = StructType([
     StructField('lat', FloatType(), True),
     StructField('lon', FloatType(), True),
     StructField('alt', StringType(), True),
-    StructField('tz', StringType(), True),
+    StructField('TZ', FloatType(), True),
     StructField('dst', StringType(), True),
-    StructField('timezone', StringType(), True),
+    StructField('tz2', StringType(), True),
 ])
 
 
 airport_df = spark.read.csv(
     "./data/export_luchthavens.txt", 
-    header=True,
+    # header=True,
     sep="\t",
     multiLine=True,
     schema=airport_schema
@@ -110,4 +111,19 @@ weather_df = spark.read.csv(
 
 # airport_df.show(3, False)
 # customers_df.show(3, False)
-weather_df.show(3, False)
+# weather_df.show(3, False)
+
+location_df = airport_df.dropna().collect()
+
+locations = list(map(lambda r : [r['airport'], r['city'],(r['lat'], r['lon'])], location_df)) 
+map_tweets = folium.Map(location=[65,26], zoom_start=4)
+
+for location_airport, location_city, location_coords in locations:
+    folium.Circle(location=location_coords,
+                  popup = f"{location_city}: {location_airport}",
+                  radius = 1000,
+                  color="crimson",
+                  fill_color="crimson",
+                  tooltip=location_airport
+                  ).add_to(map_tweets)
+map_tweets
