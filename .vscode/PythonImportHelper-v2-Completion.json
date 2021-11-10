@@ -7,5 +7,167 @@
         "description": "boto3",
         "detail": "boto3",
         "documentation": {}
+    },
+    {
+        "label": "SparkContext",
+        "importPath": "pyspark",
+        "description": "pyspark",
+        "isExtraImport": true,
+        "detail": "pyspark",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "pyspark.sql.types",
+        "description": "pyspark.sql.types",
+        "isExtraImport": true,
+        "detail": "pyspark.sql.types",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "pyspark.sql",
+        "description": "pyspark.sql",
+        "isExtraImport": true,
+        "detail": "pyspark.sql",
+        "documentation": {}
+    },
+    {
+        "label": "functions",
+        "importPath": "pyspark.sql",
+        "description": "pyspark.sql",
+        "isExtraImport": true,
+        "detail": "pyspark.sql",
+        "documentation": {}
+    },
+    {
+        "label": "col",
+        "importPath": "pyspark.sql.functions",
+        "description": "pyspark.sql.functions",
+        "isExtraImport": true,
+        "detail": "pyspark.sql.functions",
+        "documentation": {}
+    },
+    {
+        "label": "desc",
+        "importPath": "pyspark.sql.functions",
+        "description": "pyspark.sql.functions",
+        "isExtraImport": true,
+        "detail": "pyspark.sql.functions",
+        "documentation": {}
+    },
+    {
+        "label": "asc",
+        "importPath": "pyspark.sql.functions",
+        "description": "pyspark.sql.functions",
+        "isExtraImport": true,
+        "detail": "pyspark.sql.functions",
+        "documentation": {}
+    },
+    {
+        "label": "lit",
+        "importPath": "pyspark.sql.functions",
+        "description": "pyspark.sql.functions",
+        "isExtraImport": true,
+        "detail": "pyspark.sql.functions",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "rc",
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "isExtraImport": true,
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "sc",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "sc = SparkContext(\"local\").getOrCreate()\nsqlContext = SQLContext(sc)\nspark = SparkSession(sc)\nplt.style.use('ggplot')\n# AIRPORT DATAFRAME\nairport_schema = StructType([\n    StructField('airport', StringType(), True),\n    StructField('city', StringType(), True),\n    StructField('country', StringType(), True),\n    StructField('IATA', StringType(), True),",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "sqlContext",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "sqlContext = SQLContext(sc)\nspark = SparkSession(sc)\nplt.style.use('ggplot')\n# AIRPORT DATAFRAME\nairport_schema = StructType([\n    StructField('airport', StringType(), True),\n    StructField('city', StringType(), True),\n    StructField('country', StringType(), True),\n    StructField('IATA', StringType(), True),\n    StructField('ICAO', StringType(), True),",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "spark",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "spark = SparkSession(sc)\nplt.style.use('ggplot')\n# AIRPORT DATAFRAME\nairport_schema = StructType([\n    StructField('airport', StringType(), True),\n    StructField('city', StringType(), True),\n    StructField('country', StringType(), True),\n    StructField('IATA', StringType(), True),\n    StructField('ICAO', StringType(), True),\n    StructField('lat', FloatType(), True),",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "airport_schema",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "airport_schema = StructType([\n    StructField('airport', StringType(), True),\n    StructField('city', StringType(), True),\n    StructField('country', StringType(), True),\n    StructField('IATA', StringType(), True),\n    StructField('ICAO', StringType(), True),\n    StructField('lat', FloatType(), True),\n    StructField('lon', FloatType(), True),\n    StructField('alt', StringType(), True),\n    StructField('tz', StringType(), True),",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "airport_df",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "airport_df = spark.read.csv(\n    \"./data/export_luchthavens.txt\", \n    header=True,\n    sep=\"\\t\",\n    multiLine=True,\n    schema=airport_schema\n)\n# CUSTOMERS DATAFRAME\ncustomers_schema = StructType([\n    StructField('id', IntegerType(), True),",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "customers_schema",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "customers_schema = StructType([\n    StructField('id', IntegerType(), True),\n    StructField('operation', FloatType(), True),\n    StructField('facilities', FloatType(), True),\n    StructField('shops', FloatType(), True),\n])\ncustomers_df = spark.read.csv(\n    \"./data/export_klant.csv\", \n    header=True,\n    sep=\";\",",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "customers_df",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "customers_df = spark.read.csv(\n    \"./data/export_klant.csv\", \n    header=True,\n    sep=\";\",\n    multiLine=True,\n    schema=customers_schema\n)\n# WEATHER DATAFRAME\nweather_schema = StructType([\n    StructField('date', DateType(), True),",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "weather_schema",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "weather_schema = StructType([\n    StructField('date', DateType(), True),\n    StructField('DDVEC', IntegerType(), True),\n    StructField('FHVEC', IntegerType(), True),\n    StructField('FG', IntegerType(), True),\n    StructField('FHX', IntegerType(), True),\n    StructField('FHXH', IntegerType(), True),\n    StructField('FHN', IntegerType(), True),\n    StructField('FHNH', IntegerType(), True),\n    StructField('FXX', IntegerType(), True),",
+        "detail": "senne",
+        "documentation": {}
+    },
+    {
+        "label": "weather_df",
+        "kind": 5,
+        "importPath": "senne",
+        "description": "senne",
+        "peekOfCode": "weather_df = spark.read.csv(\n    \"./data/export_weer.txt\", \n    header=True,\n    sep=\"\\t\",\n    multiLine=True,\n    schema=weather_schema\n)\n# airport_df.show(3, False)\n# customers_df.show(3, False)\nweather_df.show(3, False)",
+        "detail": "senne",
+        "documentation": {}
     }
 ]
