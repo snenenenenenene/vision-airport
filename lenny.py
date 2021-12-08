@@ -23,7 +23,7 @@ vertrek_schema = StructType([
   ])
 
 vertrek_df = spark.read.csv(
-    DATADIR + "/export_vertrek.txt", 
+    DATADIR + "/export_vertrek.txt",
     header=True,
     sep='\t',
     schema=vertrek_schema
@@ -32,7 +32,7 @@ vertrek_df = spark.read.csv(
 vertrek_df.filter("Vracht != null").show()
 
 
-# Aankomst 
+# Aankomst
 
 aankomst_schema = StructType([
     StructField("Vluchtid", IntegerType(), False),
@@ -46,7 +46,7 @@ aankomst_schema = StructType([
   ])
 
 aankomst_df = spark.read.csv(
-    DATADIR + "/export_aankomst.txt", 
+    DATADIR + "/export_aankomst.txt",
     header=True,
     sep='\t',
     schema=aankomst_schema
@@ -67,7 +67,7 @@ planning_schema = StructType([
   ])
 
 planning_df = spark.read.csv(
-    DATADIR + "/export_planning.txt", 
+    DATADIR + "/export_planning.txt",
     header=True,
     sep='\t',
     schema=planning_schema

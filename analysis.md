@@ -86,21 +86,33 @@ Hier presenteren we onze bevindingen aan Ordina en lector Dries Van Hansewijck.
 <img src="./assets/aws.png" alt="drawing" width="100"/>
 
 **AWS S3**
+Er zullen S3 buckets gebruikt worden om de parquet files op te slaan. Deze kunnen dan gebruikt worden door de andere AWS services.
+
 **AWS Athena**
+Om querries op de bestanden in de S3 buckets uit te voeren maken we gebruik van Athena.
+
 **AWS Quicksight**
+Dashboards en rapportering worden gemaakt via AWS Quicksight.
 #### Machine Learning
 <img src="./assets/python.png" alt="drawing" width="100"/>
 
 **Python**
+Aangezien Python de meest gebruikte ML taal is gebruiken we deze. We zullen hier ook gebruik maken van een heleboel modules en libraries.
+
 **Jupyter**
+Het notebook bestand gebruikt Jupyter zodat we een mooi overzicht kunnen krijgen van de data via de inline plotting.
+
 **Matplotlib**
+Zowel de lokale data als de data die vanuit AWS komt zal in grafieken gezet worden via matplotlib.
 **Pyspark**
+Om de csv en txt bestanden om te zetten naar parquet bestanden om te zetten gebruiken we pyspark. Dit zal ook een belangrijke communicatielaag zijn tussen AWS en de lokale notebook.
+
 **Tensorflow**
+Om uiteindelijk het AI-model te trainen zullen we gebruik maken van de talrijke op voorhand geconfigureerde tensorflow machine learning modellen zoals keras.
 #### Teksteditor
 <img src="./assets/vscode.png" alt="drawing" width="100"/>
 
 **VSCode**
-
-### Functioneel Design
-
+De bekende IDE VSCode is een perfect fit voor dit project. Aangezien het een Open Source IDE is zijn er enorm veel extensions die ons zullen helpen tijdens het project zoals bijvoorbeeld de Jupyter notebook integration extension.
 ### Impact op huidige infrastructuur
+In plaats van flatfiles zal de data in een datalake worden gezet. Dit heeft geen impact op de lokale infrastructuur van de Ordina offices maar aangezien de data wordt opgeslagen in de AWS S3 buckets zal Ordina wel extra dataopslag hebben.
