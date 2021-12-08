@@ -1,15 +1,11 @@
-from numpy import string
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
-
-import pyarrow.parquet as pq
 
 spark = SparkSession.builder.appName("vision-airport").getOrCreate()
 
 DATADIR = "./data"
 
-
-# Vertrek
+# Vertrek =========================================================================================
 
 vertrek_schema = StructType([
     StructField("Vluchtid", IntegerType(), False),
@@ -29,10 +25,10 @@ vertrek_df = spark.read.csv(
     schema=vertrek_schema
 )
 
-vertrek_df.filter("Vracht != null").show()
+vertrek_df = vertrek_df.dropna()
+vertrek_df.write.parquet("aws/vertrek.parquet")
 
-
-# Aankomst 
+# Aankomst ===========================================================================================
 
 aankomst_schema = StructType([
     StructField("Vluchtid", IntegerType(), False),
@@ -52,10 +48,10 @@ aankomst_df = spark.read.csv(
     schema=aankomst_schema
 )
 
-aankomst_df.show()
+aankomst_df = aankomst_df.dropna()
+aankomst_df.write.parquet("aws/aankomst.parquet")
 
-
-# Planning
+# Planning ===============================================================================================
 
 planning_schema = StructType([
     StructField("Vluchtnr", IntegerType(), False),
@@ -73,4 +69,5 @@ planning_df = spark.read.csv(
     schema=planning_schema
 )
 
-planning_df.show()
+planning_df = planning_df.dropna()
+planning_df.write.parquet("aws/planning.parquet")
