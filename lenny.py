@@ -1,9 +1,18 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
+import os
 
-spark = SparkSession.builder.appName("vision-airport").getOrCreate()
+os.environ['PYSPARK_SUBMIT_ARGS'] = "--packages=com.amazonaws:aws-java-sdk-bundle:1.11.271,org.apache.hadoop:hadoop-aws:3.1.2 pyspark-shell"
+
+spark = SparkSession.builder.master("local").appName("visie-luchthaven").getOrCreate()
+
+spark.conf.set("spark.sql.repl.eagerEval.enabled", True)
+spark.conf.set("fs.s3a.access.key", "AKIATUJ2TY2HH3TJP2X6")
+spark.conf.set("fs.s3a.secret.key", "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")
+spark.conf.set("fs.s3a.endpoint", "s3.eu-west-1.amazonaws.com")
 
 DATADIR = "./data"
+BUCKET = "s3a://ap-project-big-data-2021/BD-01/cleansed/"
 
 # Vertrek =========================================================================================
 
@@ -25,8 +34,7 @@ vertrek_df = spark.read.csv(
     schema=vertrek_schema
 )
 
-vertrek_df = vertrek_df.dropna()
-vertrek_df.write.parquet("aws/vertrek.parquet")
+vertrek_df.write.parquet(BUCKET + "vertrek.parquet")
 
 # Aankomst ===========================================================================================
 
@@ -48,8 +56,7 @@ aankomst_df = spark.read.csv(
     schema=aankomst_schema
 )
 
-aankomst_df = aankomst_df.dropna()
-aankomst_df.write.parquet("aws/aankomst.parquet")
+aankomst_df.write.parquet(BUCKET + "aankomst.parquet")
 
 # Planning ===============================================================================================
 
@@ -69,5 +76,4 @@ planning_df = spark.read.csv(
     schema=planning_schema
 )
 
-planning_df = planning_df.dropna()
-planning_df.write.parquet("aws/planning.parquet")
+planning_df.write.parquet(BUCKET + "planning.parquet")
