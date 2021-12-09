@@ -125,10 +125,9 @@ De bekende IDE VSCode is een perfect fit voor dit project. Aangezien het een Ope
 
 ### Data lake
 
-Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van een **Data Lake**. Deze zal gegenereerd worden uit een relationele database -- gemaakt via AWS Athena. Uiteindelijk zal deze data lake dan gequerried kunnen worden op een myriade van verschillende filters en tabellen. Hierdoor zullen we een zo specifiek mogelijk beeld kunnen geven omtrent een business operation of trend. De verschillende tabellen op welke gefilterd kan worden:
-|   |   |
-|---|---|
+Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van een **Data Lake**. Deze zal gegenereerd worden uit een relationele database -- gemaakt via AWS Athena. Uiteindelijk zal deze data lake dan gequerried kunnen worden op een myriade van verschillende filters en tabellen. Hierdoor zullen we een zo specifiek mogelijk beeld kunnen geven omtrent een business operation of trend. De verschillende tabellen op welke gefilterd kan worden:ß
 |Aankomsten|Vertrek|
+|---|---|
 |Banen|Vliegtuig|
 |Klanten|Vliegtuigtype|
 |Luchthavens|Vlucht|
