@@ -135,6 +135,10 @@ planning_df.write\
 
 # Vliegtuigtype ==========================================================================================
 
+
+
+# Vliegtuig ==============================================================================================
+
 vliegtuig_type_schema = StructType([
     StructField("IATA", StringType(), True),
     StructField("ICAO",StringType(),True),
@@ -153,16 +157,10 @@ vliegtuig_type = spark.read.csv(
     schema=vliegtuig_type_schema
 )
 
-vliegtuig_type.write\
-    .mode("overwrite")\
-    .parquet(BUCKET + "vliegtuig_type.parquet")
-
-# Vliegtuig ==============================================================================================
-
 vliegtuig_schema = StructType([
     StructField("Airlinecode", StringType(),True),
     StructField("Vliegtuigcode", StringType(), True),
-    StructField("Vliegtuigtype",StringType(),True),
+    StructField("Vliegtuigtype", StringType(),True),
     StructField("Bouwjaar", IntegerType(), True)
   ])
 
@@ -172,6 +170,10 @@ vliegtuig_df = spark.read.csv(
     sep='\t',
     schema=vliegtuig_schema
 )
+
+vliegtuig_df = vliegtuig_df\
+    .join(vliegtuig_type, vliegtuig_df.Vliegtuigtype == vliegtuig_type.IATA)\
+    .drop("Vliegtuigtype")
 
 vliegtuig_df.write\
     .mode("overwrite")\
