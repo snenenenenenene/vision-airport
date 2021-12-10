@@ -195,7 +195,7 @@ vlucht_df = spark.read.csv(
     schema=vlucht_schema
 )
 
-vlucht_df.write.parquet(BUCKET + "vlucht.parquet")
+vlucht_df.write.partitionBy(col("Datum")).parquet(BUCKET + "vlucht.parquet")
 
 # Vertrek =========================================================================================
 
