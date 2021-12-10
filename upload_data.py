@@ -1,41 +1,27 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
+import pyspark.sql.functions as F
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
+ACCESS_KEY = os.environ.get("ACCESS_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+ENDPOINT = os.environ.get("ENDPOINT")
 os.environ['PYSPARK_SUBMIT_ARGS'] = "--packages=com.amazonaws:aws-java-sdk-bundle:1.11.271,org.apache.hadoop:hadoop-aws:3.1.2 pyspark-shell"
 
 spark = SparkSession.builder.master("local").appName("visie-luchthaven").getOrCreate()
 
 spark.conf.set("spark.sql.repl.eagerEval.enabled", True)
-spark.conf.set("fs.s3a.access.key", "AKIATUJ2TY2HH3TJP2X6")
-spark.conf.set("fs.s3a.secret.key", "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")
-spark.conf.set("fs.s3a.endpoint", "s3.eu-west-1.amazonaws.com")
+spark.conf.set("fs.s3a.access.key", ACCESS_KEY)
+spark.conf.set("fs.s3a.secret.key", SECRET_KEY)
+spark.conf.set("fs.s3a.endpoint", ENDPOINT)
 spark.conf.set("spark.sql.caseSensitive","true")
 
 DATADIR = "./data/"
 BUCKET = "s3a://ap-project-big-data-2021/BD-01/cleansed/"
 
-# Aankomst ===========================================================================================
-
-aankomst_schema = StructType([
-    StructField("Vluchtid", IntegerType(), False),
-    StructField("Vliegtuigcode",StringType(),True),
-    StructField("Terminal", StringType(), True),
-    StructField("Gate", StringType(), True),
-    StructField("Baan", ShortType(), True),
-    StructField("Bezetting", IntegerType(), True),
-    StructField("Vracht", IntegerType(), True),
-    StructField("Aankomsttijd", TimestampType(), True)
-  ])
-
-aankomst_df = spark.read.csv(
-    DATADIR + "export_aankomst.txt",
-    header=True,
-    sep='\t',
-    schema=aankomst_schema
-)
-
-aankomst_df.write.parquet(BUCKET + "aankomst.parquet")
 
 # Airport ================================================================================================
 
@@ -61,7 +47,9 @@ airport_df = spark.read.csv(
     schema=airport_schema
 )
 
-airport_df.write.parquet(BUCKET + "airport.parquet")
+airport_df.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "airport.parquet")
 
 # Banen ==================================================================================================
 
@@ -79,7 +67,9 @@ banen_df = spark.read.csv(
     schema= banen_schema
 )
 
-banen_df.write.parquet(BUCKET + "banen.parquet")
+banen_df.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "banen.parquet")
 
 # Customers ==============================================================================================
 
@@ -98,7 +88,9 @@ customers_df = spark.read.csv(
     schema=customers_schema
 )
 
-customers_df.write.parquet(BUCKET + "customers.parquet")
+customers_df.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "customers.parquet")
 
 # Maatschappij ===========================================================================================
 
@@ -115,7 +107,9 @@ maatschappijen_df = spark.read.csv(
     schema=maatschappijen_schema
 )
 
-maatschappijen_df.write.parquet(BUCKET + "maatschappijen.parquet")
+maatschappijen_df.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "maatschappijen.parquet")
 
 # Planning ===============================================================================================
 
@@ -135,7 +129,9 @@ planning_df = spark.read.csv(
     schema=planning_schema
 )
 
-planning_df.write.parquet(BUCKET + "planning.parquet")
+planning_df.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "planning.parquet")
 
 # Vliegtuigtype ==========================================================================================
 
@@ -157,7 +153,9 @@ vliegtuig_type = spark.read.csv(
     schema=vliegtuig_type_schema
 )
 
-vliegtuig_type.write.parquet(BUCKET + "vliegtuig_type.parquet")
+vliegtuig_type.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "vliegtuig_type.parquet")
 
 # Vliegtuig ==============================================================================================
 
@@ -175,7 +173,9 @@ vliegtuig_df = spark.read.csv(
     schema=vliegtuig_schema
 )
 
-vliegtuig_df.write.parquet(BUCKET + "vliegtuig.parquet")
+vliegtuig_df.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "vliegtuig.parquet")
 
 # Vlucht =================================================================================================
 
@@ -195,29 +195,10 @@ vlucht_df = spark.read.csv(
     schema=vlucht_schema
 )
 
-vlucht_df.write.partitionBy(col("Datum")).parquet(BUCKET + "vlucht.parquet")
+vlucht_df.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "vlucht.parquet")
 
-# Vertrek =========================================================================================
-
-vertrek_schema = StructType([
-    StructField("Vluchtid", IntegerType(), False),
-    StructField("Vliegtuigcode",StringType(),True),
-    StructField("Terminal", StringType(),True),
-    StructField("Gate", StringType(), True),
-    StructField("Baan", ShortType(), True),
-    StructField("Bezetting", IntegerType(), True),
-    StructField("Vracht", IntegerType(), True),
-    StructField("Vertrektijd", TimestampType(), True)
-  ])
-
-vertrek_df = spark.read.csv(
-    DATADIR + "export_vertrek.txt",
-    header=True,
-    sep='\t',
-    schema=vertrek_schema
-)
-
-vertrek_df.write.parquet(BUCKET + "vertrek.parquet")
 
 # Weather ================================================================================================
 
@@ -272,4 +253,61 @@ weather_df = spark.read.csv(
     schema=weather_schema
 )
 
-weather_df.write.parquet(BUCKET + "weather.parquet")
+weather_df.write\
+    .mode("overwrite")\
+    .parquet(BUCKET + "weather.parquet")
+
+
+# Vertrek =========================================================================================
+
+vertrek_schema = StructType([
+    StructField("Vluchtid", IntegerType(), False),
+    StructField("Vliegtuigcode",StringType(),True),
+    StructField("Terminal", StringType(),True),
+    StructField("Gate", StringType(), True),
+    StructField("Baan", ShortType(), True),
+    StructField("Bezetting", IntegerType(), True),
+    StructField("Vracht", IntegerType(), True),
+    StructField("Vertrektijd", TimestampType(), True)
+  ])
+
+vertrek_df = spark.read.csv(
+    DATADIR + "export_vertrek.txt",
+    header=True,
+    sep='\t',
+    schema=vertrek_schema
+)
+
+vertrek_df = vertrek_df.withColumn("Vertrekjaar", F.date_format(vertrek_df.Vertrektijd, "yyyy")).withColumn("Vertrekmaand", F.date_format(vertrek_df.Vertrektijd, "MM"))
+
+vertrek_df.write\
+    .partitionBy("Vertrekjaar", "Vertrekmaand")\
+    .mode("overwrite")\
+    .parquet(BUCKET + "vertrek.parquet")
+
+# Aankomst ===========================================================================================
+
+aankomst_schema = StructType([
+    StructField("Vluchtid", IntegerType(), False),
+    StructField("Vliegtuigcode",StringType(),True),
+    StructField("Terminal", StringType(), True),
+    StructField("Gate", StringType(), True),
+    StructField("Baan", ShortType(), True),
+    StructField("Bezetting", IntegerType(), True),
+    StructField("Vracht", IntegerType(), True),
+    StructField("Aankomsttijd", TimestampType(), True)
+  ])
+
+aankomst_df = spark.read.csv(
+    DATADIR + "export_aankomst.txt",
+    header=True,
+    sep='\t',
+    schema=aankomst_schema
+)
+
+aankomst_df = aankomst_df.withColumn("Aankomstjaar", F.date_format(aankomst_df.Aankomsttijd, "yyyy")).withColumn("Aankomstmaand", F.date_format(aankomst_df.Aankomsttijd, "MM"))
+
+aankomst_df.write\
+    .partitionBy("Aankomstjaar", "Aankomstmaand")\
+    .mode("overwrite")\
+    .parquet(BUCKET + "aankomst.parquet")
