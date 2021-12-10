@@ -32,13 +32,13 @@ Vision Airport is sinds enkele jaren een commerciële luchthaven, ze moeten dus 
 ## Doelstelling
 
 Dit project gaat ervoor zorgen dat we de data centraliseren, uit de flat files halen en standardiseren waardoor er gelijk rapporten gemaakt kunnen worden. Om de snelheid van het maken van beslissing te acceleren zullen we naast het gebruik van een **data lake** om de rapporteringen te automatiseren ook nog een **Machine Learning toepassing** toevoegen aan het project.
+Deze zal via verschillende tensorflow toepassingen een voorspelling maken van de klant ratings op basis van een aantal factoren en hyperparameters. Aangezien luchthavens hun brood verdienen aan klanten zal het model beduidend zijn voor de accuraatheid alsook de operationele snelheid van VisionAirport.
 
 ## Scope
 
 - BI-platform
 - Dashboard
 - Rapportering
-- Ingestion
 - Cleaning
 - Exploration
 - Technische Documentatie
@@ -53,12 +53,11 @@ Dit project gaat ervoor zorgen dat we de data centraliseren, uit de flat files h
 - Infrastructuur implementatie
 - Organisatorische implementatie
 - Full-client
-- Sofwareselectietraject
 
 # Planning
 
 | Hoofdlijn    | Deadline |
-| ------------ | -------- |
+|--------------|----------|
 | Sprint 1     |          |
 | Analyse      | 14/12/21 |
 | Notebook     | 14/12/21 |
@@ -126,16 +125,19 @@ De bekende IDE VSCode is een perfect fit voor dit project. Aangezien het een Ope
 
 ## Data lake
 
-Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van een **Data Lake**. Deze zal gegenereerd worden uit een relationele database -- gemaakt via AWS Athena. Uiteindelijk zal deze data lake dan gequerried kunnen worden op een myriade van verschillende filters en tabellen. Hierdoor zullen we een zo specifiek mogelijk beeld kunnen geven omtrent een business operation of trend. De verschillende tabellen op welke gefilterd kan worden:ß
-|Aankomsten|Vertrek|
-|---|---|
-|Banen|Vliegtuig|
-|Klanten|Vliegtuigtype|
-|Luchthavens|Vlucht|
-|Maatschappijen|Weer|
-|Planning||
+Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van een **Data Lake**. Deze zal gegenereerd worden uit een relationele database -- gemaakt via AWS Athena. Uiteindelijk zal deze data lake dan gequerried kunnen worden op een myriade van verschillende filters en tabellen. Hierdoor zullen we een zo specifiek mogelijk beeld kunnen geven omtrent een business operation of trend. De verschillende tabellen op welke gefilterd kan worden:
 
-## Data lake schema
+| Aankomsten     | Vertrek       |
+|----------------|---------------|
+| Banen          | Vliegtuig     |
+| Klanten        | Vliegtuigtype |
+| Luchthavens    | Vlucht        |
+| Maatschappijen | Weer          |
+| Planning       |               |
+
+### Data lake schema
+
+<img src="./assets/diagrams/STER.png" alt="drawing"/>
 
 <img src="./assets/diagrams/STER.drawio.png" alt="drawing"/>  
      
@@ -143,4 +145,4 @@ Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van ee
 
 Zoals beschreven staat in de ‘AS-IS Situatie’ moet VisionAirport hun data uit verschillende locaties halen.
 Aangezien deze data nu opgeslagen zal worden in een centrale data lake binnen **AWS**
-zal het voor VisionAirport niet nodig zijn om een server aan te kopen.
+zal het voor VisionAirport niet nodig zijn om een server aan te kopen en is er dus geen impact op de huidige infrastructuur.
