@@ -59,30 +59,32 @@ Dit project gaat ervoor zorgen dat we de data centraliseren, uit de flat files h
 
 | Hoofdlijn    | Deadline |
 | ------------ | -------- |
-| Sprint 1 |  |
+| Sprint 1     |          |
 | Analyse      | 14/12/21 |
 | Notebook     | 14/12/21 |
-| Sprint 2 |  |
+| Sprint 2     |          |
 | Rapportering | 21/12/21 |
 | ML-model     | 21/12/21 |
 
 #### Toelichting Fases
 
 1. **Analyse**:
-We maken een blueprint waarin we een analyse maken van het project. De analyse moet een duidelijker beeld scheppen van het project.
+   We maken een blueprint waarin we een analyse maken van het project. De analyse moet een duidelijker beeld scheppen van het project.
 
 2. **Design**:
-We creëren een Proof of Concept (POC) waarop we in de volgende fase verder op kunnen bouwen.
-Deze POC zal ook een duidelijke weergave voorbrengen in verband met wat we zullen opleveren en hoe we dit willen realiseren.
+   We creëren een Proof of Concept (POC) waarop we in de volgende fase verder op kunnen bouwen.
+   Deze POC zal ook een duidelijke weergave voorbrengen in verband met wat we zullen opleveren en hoe we dit willen realiseren.
 
 3. **Construct**:
-We ontwikkelen een dashboard en rapporteringen met AWS Quicksight alsook een ML-model dat voorspellingen zal doen.
+   We ontwikkelen een dashboard en rapporteringen met AWS Quicksight alsook een ML-model dat voorspellingen zal doen.
 
- 1. **Turnover**:
-Hier presenteren we onze bevindingen aan Ordina en lector Dries Van Hansewijck.
+4. **Turnover**:
+   Hier presenteren we onze bevindingen aan Ordina en lector Dries Van Hansewijck.
 
 ### Technisch Design
+
 #### Microservices
+
 <img src="./assets/aws.png" alt="drawing" width="100"/>
 
 **AWS S3**
@@ -93,7 +95,9 @@ Om querries op de bestanden in de S3 buckets uit te voeren maken we gebruik van 
 
 **AWS Quicksight**
 Dashboards en rapportering worden gemaakt via AWS Quicksight.
+
 #### Machine Learning
+
 <img src="./assets/python.png" alt="drawing" width="100"/>
 
 **Python**
@@ -109,10 +113,33 @@ Om de csv en txt bestanden om te zetten naar parquet bestanden om te zetten gebr
 
 **Tensorflow**
 Om uiteindelijk het AI-model te trainen zullen we gebruik maken van de talrijke op voorhand geconfigureerde tensorflow machine learning modellen zoals keras.
+
 #### Teksteditor
+
 <img src="./assets/vscode.png" alt="drawing" width="100"/>
 
 **VSCode**
 De bekende IDE VSCode is een perfect fit voor dit project. Aangezien het een Open Source IDE is zijn er enorm veel extensions die ons zullen helpen tijdens het project zoals bijvoorbeeld de Jupyter notebook integration extension.
+
+### Technisch Design
+
+### Data lake
+
+Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van een **Data Lake**. Deze zal gegenereerd worden uit een relationele database -- gemaakt via AWS Athena. Uiteindelijk zal deze data lake dan gequerried kunnen worden op een myriade van verschillende filters en tabellen. Hierdoor zullen we een zo specifiek mogelijk beeld kunnen geven omtrent een business operation of trend. De verschillende tabellen op welke gefilterd kan worden:ß
+|Aankomsten|Vertrek|
+|---|---|
+|Banen|Vliegtuig|
+|Klanten|Vliegtuigtype|
+|Luchthavens|Vlucht|
+|Maatschappijen|Weer|
+|Planning||
+
+##### Data lake schema
+
+<img src="./assets/diagrams/STER.png" alt="drawing"/>
+
 ### Impact op huidige infrastructuur
-In plaats van flatfiles zal de data in een datalake worden gezet. Dit heeft geen impact op de lokale infrastructuur van de Ordina offices maar aangezien de data wordt opgeslagen in de AWS S3 buckets zal Ordina wel extra dataopslag hebben.
+
+Zoals beschreven staat in de ‘AS-IS Situatie’ moet VisionAirport hun data uit verschillende locaties halen.
+Aangezien deze data nu opgeslagen zal worden in een centrale data lake binnen **AWS**
+zal het voor VisionAirport niet nodig zijn om een server aan te kopen.

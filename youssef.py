@@ -18,7 +18,7 @@ maatschappijen_schema = StructType([
   ])
 
 banen_df = spark.read.csv(
-    "C:\export_banen.csv", 
+    "C:\export_banen.csv",
     header=True,
     sep=';',
     schema= banen_schema
@@ -27,7 +27,7 @@ banen_df = spark.read.csv(
 banen_df.write.parquet("banen.parquet")
 
 maatschappijen_df = spark.read.csv(
-    "C:\export_maatschappijen.txt", 
+    "C:\export_maatschappijen.txt",
     header=True,
     sep='\t',
     schema=maatschappijen_schema
