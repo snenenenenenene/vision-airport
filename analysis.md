@@ -136,7 +136,7 @@ Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van ee
 
 ##### Data lake schema
 
-<img src="./assets/diagrams/STER.png" alt="drawing"/>
+<img src="./assets/diagrams/STER.drawio.png" alt="drawing"/>
 
 ### Impact op huidige infrastructuur
 
