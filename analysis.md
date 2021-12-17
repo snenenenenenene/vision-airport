@@ -2,9 +2,9 @@
 
 ## Analyse Vision Airport
 
-Onderdeel van Integrated Project Big Data
-ondersteund door de
-_Artesis Plantijn Hogeschool_
+Onderdeel van Integrated Project Big Data  
+ondersteund door de  
+_Artesis Plantijn Hogeschool_  
 **Senne Bels, Lenny Bontenakel, Youssef El Boujeddainim & Prem Kokra**
 
 ---
@@ -19,13 +19,13 @@ Dries Van Hansewijck, lector van AP Hogeschool, zal het project opvolgen en het 
 
 # Samenvatting
 
-VisionAirport is al jaren verwikkeld in een steekspel op zoek naar de maximale groei. De vraag naar vluchten neemt elk jaar weer toe, ondanks enkele tegenslagen die de luchtvaartsector de laatste jaren heeft gehad zoals COVID. Steeds meer factoren krijgen invloed op de toekomst van VisionAirport. De internationale verhoudingen veranderen en zaken als geluidshinder en milieuvervuiling spelen een steeds grotere rol.
+VisionAirport is al jaren verwikkeld in een steekspel op zoek naar de maximale groei. De vraag naar vluchten neemt elk jaar weer toe. Ondanks enkele tegenslagen die de luchtvaartsector de laatste jaren heeft gehad, waaronder COVID. Steeds meer factoren krijgen invloed op de toekomst van VisionAirport. De internationale verhoudingen veranderen en zaken als geluidshinder en milieuvervuiling spelen een steeds grotere rol.
 
 # Situatie As-Is
 
 ## Probleemstelling
 
-Vision Airport is sinds enkele jaren een commerciële luchthaven, ze moeten dus verantwoording afleggen bij stakeholders, overheid en media. Deze informatie moet ook steeds meer en meer in detail zijn. Het verzamelen, groeperen en het rapporteren van de data is de verantwoordelijkheid van de afdeling “informatiemanagement”. Ze hebben op verschillende plaatsen in de organisatie databronnen. Hierdoor is het verzamelen en standaardiseren van de data een tijdrovend proces. Pas daarna kunnen ze beginnen aan het maken van rapporten en dashboards, waardoor ze maar zeer laat bij directie stakeholders en media terecht komen. Dit heeft invloed op de snelheid en accuraatheid waarmee men beslissingen kan maken.
+Vision Airport is sinds enkele jaren een commerciële luchthaven, ze moeten dus verantwoording afleggen bij stakeholders, overheid en media. Deze informatie moet ook steeds meer en meer in detail zijn. Het verzamelen, groeperen en het rapporteren van de data is de verantwoordelijkheid van de afdeling “informatiemanagement”. Ze hebben op verschillende plaatsen in de organisatie databronnen. Hierdoor is het verzamelen en standaardiseren van de data een tijdrovend proces. Pas daarna kunnen ze beginnen aan het maken van rapporten en dashboards, waardoor ze maar zeer laat bij directie, stakeholders en media terecht komen. Dit heeft invloed op de snelheid en accuraatheid waarmee men beslissingen kan maken.
 
 # Situatie To-Be
 
@@ -138,6 +138,13 @@ Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van ee
 ### Data lake schema
 
 <img src="./assets/diagrams/STER.png" alt="drawing"/>
+
+## Rapportage
+
+## Machine learning
+
+We 
+
      
 # Impact op huidige infrastructuur
 
