@@ -9,6 +9,8 @@ aws/*
 # C extensions
 *.so
 data/
+aws/
+
 # Distribution / packaging
 .Python
 build/
