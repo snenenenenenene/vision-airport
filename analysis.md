@@ -67,17 +67,17 @@ Deze zal via verschillende tensorflow toepassingen een voorspelling maken van de
 
 ## Toelichting Fases
 
-1. **Analyse**:  
+1. **Analyse**:
    We maken een blueprint waarin we een analyse maken van het project. De analyse moet een duidelijker beeld scheppen van het project.
 
-2. **Design**:  
+2. **Design**:
    We creëren een Proof of Concept (POC) waarop we in de volgende fase verder op kunnen bouwen.
    Deze POC zal ook een duidelijke weergave voorbrengen in verband met wat we zullen opleveren en hoe we dit willen realiseren.
 
-3. **Construct**:  
+3. **Construct**:
    We ontwikkelen een dashboard en rapporteringen met AWS Quicksight alsook een ML-model dat voorspellingen zal doen.
 
-4. **Turnover**:  
+4. **Turnover**:
    Hier presenteren we onze bevindingen aan Ordina en lector Dries Van Hansewijck.
 
 # Technisch Design
@@ -86,32 +86,32 @@ Deze zal via verschillende tensorflow toepassingen een voorspelling maken van de
 
 <img src="./assets/aws.png" alt="drawing" width="100"/>
 
-**AWS S3**  
+**AWS S3**
 Er zullen S3 buckets gebruikt worden om de parquet files op te slaan. Deze kunnen dan gebruikt worden door de andere AWS services.
 
-**AWS Athena**  
+**AWS Athena**
 Om querries op de bestanden in de S3 buckets uit te voeren maken we gebruik van Athena.
 
-**AWS Quicksight**  
+**AWS Quicksight**
 Dashboards en rapportering worden gemaakt via AWS Quicksight.
 
 ## Machine Learning
 
 <img src="./assets/python.png" alt="drawing" width="100"/>
 
-**Python**  
+**Python**
 Aangezien Python de meest gebruikte ML taal is gebruiken we deze. We zullen hier ook gebruik maken van een heleboel modules en libraries.
 
-**Jupyter**  
+**Jupyter**
 Het notebook bestand gebruikt Jupyter zodat we een mooi overzicht kunnen krijgen van de data via de inline plotting.
 
-**Matplotlib**  
+**Matplotlib**
 Zowel de lokale data als de data die vanuit AWS komt zal in grafieken gezet worden via matplotlib.
 
-**Pyspark**  
+**Pyspark**
 Om de csv en txt bestanden om te zetten naar parquet bestanden om te zetten gebruiken we pyspark. Dit zal ook een belangrijke communicatielaag zijn tussen AWS en de lokale notebook.
 
-**Tensorflow**  
+**Tensorflow**
 Om uiteindelijk het AI-model te trainen zullen we gebruik maken van de talrijke op voorhand geconfigureerde tensorflow machine learning modellen zoals keras.
 
 ## Teksteditor
@@ -139,13 +139,6 @@ Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van ee
 
 <img src="./assets/diagrams/STER.png" alt="drawing"/>
 
-## Rapportage
-
-## Machine learning
-
-We 
-
-     
 # Impact op huidige infrastructuur
 
 Zoals beschreven staat in de ‘AS-IS Situatie’ moet VisionAirport hun data uit verschillende locaties halen.
