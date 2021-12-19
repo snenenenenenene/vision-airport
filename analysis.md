@@ -53,6 +53,7 @@ Deze zal via verschillende tensorflow toepassingen een voorspelling maken van de
 - Infrastructuur implementatie
 - Organisatorische implementatie
 - Full-client
+- Maintenance
 
 # Planning
 
@@ -87,13 +88,24 @@ Deze zal via verschillende tensorflow toepassingen een voorspelling maken van de
 <img src="./assets/aws.png" alt="drawing" width="100"/>
 
 **AWS S3**
+is gemaakt om data op te slaan maar de data die we hier opslagen is niet gemaakt om direct queries op uit te voeren. Je kunt dit vergelijken met een mapje op je computer met losse files op. Voor queries uit te voeren hebben we een andere service, AWS Athena.
 Er zullen S3 buckets gebruikt worden om de parquet files op te slaan. Deze kunnen dan gebruikt worden door de andere AWS services.
 
+<img src="./assets/aws s3.png" alt="drawing" width="100"/>
+
 **AWS Athena**
+Zoals eerder gezegd kunnen we geen queries uitvoeren op de S3 buckets maar dankzij deze service is dit wel mogelijk. We voeren de datasource in op Athena, via deze weg is het wel mogelijk om queries uit te voeren op data die zich in buckets bevinden.
 Om querries op de bestanden in de S3 buckets uit te voeren maken we gebruik van Athena.
 
+<img src="./assets/aws athena.png" alt="drawing" width="100"/>
+
+
 **AWS Quicksight**
+is een service die ons helpt om data insights te maken uit data die we hebben. Deze service is gebouwd op machine-learning modellen die ons zou helpen met BI-inzichten te vinden in de geuploadde data.
 Dashboards en rapportering worden gemaakt via AWS Quicksight.
+
+<img src="./assets/aws quicksight.png" alt="drawing" width="100"/>
+
 
 ## Machine Learning
 
@@ -125,7 +137,8 @@ De bekende IDE VSCode is een perfect fit voor dit project. Aangezien het een Ope
 
 ## Data lake
 
-Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van een **Data Lake**. Deze zal gegenereerd worden uit een relationele database -- gemaakt via AWS Athena. Uiteindelijk zal deze data lake dan gequerried kunnen worden op een myriade van verschillende filters en tabellen. Hierdoor zullen we een zo specifiek mogelijk beeld kunnen geven omtrent een business operation of trend. De verschillende tabellen op welke gefilterd kan worden:
+Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van een **Data Lake**. Een data lake is een opslagplaats waar data wordt opgeslagen in zijn natuurlijk formaat, het verschil tussen een data lake en een data warehouse zit er in dat een data warehouse wordt opgebouwd in een relational database en een data lake niet.
+Onze data lake zal gegenereerd worden uit een relationele database -- gemaakt via **AWS Athena**. Uiteindelijk zal deze data lake dan gequerried kunnen worden op een myriade van verschillende filters en tabellen. Hierdoor zullen we een zo specifiek mogelijk beeld kunnen geven omtrent een business operation of trend. De verschillende tabellen op welke gefilterd kan worden:
 
 | Aankomsten     | Vertrek       |
 |----------------|---------------|
@@ -144,3 +157,6 @@ Om veelzijdigheid in de rapporteringen te krijgen zullen we gebruik maken van ee
 Zoals beschreven staat in de ‘AS-IS Situatie’ moet VisionAirport hun data uit verschillende locaties halen.
 Aangezien deze data nu opgeslagen zal worden in een centrale data lake binnen **AWS**
 zal het voor VisionAirport niet nodig zijn om een server aan te kopen en is er dus geen impact op de huidige infrastructuur.
+
+# Deliverables
+
