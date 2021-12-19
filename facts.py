@@ -316,10 +316,11 @@ facts_aankomst_df = facts_aankomst_df\
     .join(dim_vliegtuig_df, facts_aankomst_df.vliegtuigcode == dim_vliegtuig_df.Vliegtuigcode).drop("Vliegtuigcode", "Airlinecode")\
     .join(dim_weather_df, facts_aankomst_df.Datum == dim_weather_df.date).drop("date")
 
-
+facts_aankomst_df = facts_aankomst_df.dropna(subset="Plantijd")
 facts_aankomst_df = facts_aankomst_df.withColumn("vertraging_min", vertraging(F.col("aankomsttijd"), F.col("Plantijd")))
+
+
 
 facts_aankomst_df.write\
     .mode("overwrite")\
     .parquet(BUCKET + "aankomst.parquet")
-
