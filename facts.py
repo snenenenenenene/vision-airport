@@ -55,6 +55,9 @@ dim_luchthaven_df = spark.read.csv(
     schema=dim_luchthaven_schema
 )
 
+dim_luchthaven_df = dim_luchthaven_df.withColumnRenamed("Tz", "timezone")\
+
+
 # Banen ==================================================================================================
 
 dim_banen_schema = StructType([
@@ -70,7 +73,6 @@ dim_banen_df = spark.read.csv(
     sep=';',
     schema= dim_banen_schema
 )
-
 
 # Klanten ==============================================================================================
 
@@ -161,6 +163,8 @@ dim_vliegtuig_df = spark.read.csv(
 
 dim_vliegtuig_df = dim_vliegtuig_df\
     .join(dim_vliegtuig_type_df, dim_vliegtuig_df.Vliegtuigtype == dim_vliegtuig_type_df.IATA)\
+    .withColumnRenamed("Vracht", "vracht_vliegtuigtype")\
+
 
 # Vlucht =================================================================================================
 
@@ -271,7 +275,9 @@ facts_vertrek_df = facts_vertrek_df\
     .join(dim_weather_df, facts_vertrek_df.Datum == dim_weather_df.date).drop("date")
 
 facts_vertrek_df = facts_vertrek_df\
-    .join(dim_luchthaven_df, facts_vertrek_df.Destcode == dim_luchthaven_df.IATA).drop("IATA", "ICAO")
+    .join(dim_luchthaven_df, facts_vertrek_df.Destcode == dim_luchthaven_df.IATA)\
+    .join(dim_maatschappijen_df, facts_vertrek_df.Airlinecode == dim_maatschappijen_df.IATA).drop("IATA", "ICAO")
+
 
 
 print(f'\nVERTREK AFTER {facts_vertrek_df.count()}==================================================================\n')
@@ -314,7 +320,7 @@ facts_aankomst_df = spark.read.csv(
 )
 
 
-print(f'\n AANKOMST BEFORE {facts_vertrek_df.count()}==================================================================\n')
+print(f'\n AANKOMST BEFORE {facts_aankomst_df.count()}==================================================================\n')
 
 facts_aankomst_df = facts_aankomst_df.dropna(subset="aankomsttijd")
 facts_aankomst_df = facts_aankomst_df\
@@ -327,13 +333,14 @@ facts_aankomst_df = facts_aankomst_df\
     .join(dim_weather_df, facts_aankomst_df.Datum == dim_weather_df.date, "fullouter").drop("date")
 
 facts_aankomst_df = facts_aankomst_df\
-    .join(dim_luchthaven_df, facts_aankomst_df.Destcode == dim_luchthaven_df.IATA).drop("IATA", "ICAO")
+    .join(dim_luchthaven_df, facts_aankomst_df.Destcode == dim_luchthaven_df.IATA)\
+    .join(dim_maatschappijen_df, facts_aankomst_df.Airlinecode == dim_maatschappijen_df.IATA).drop("IATA", "ICAO")
 
 
 facts_aankomst_df = facts_aankomst_df.withColumn("vertraging_min", vertraging(F.col("aankomsttijd"), F.col("Plantijd")))
 
 
-print(f'\n AANKOMST AFTER {facts_vertrek_df.count()}==================================================================\n')
+print(f'\n AANKOMST AFTER {facts_aankomst_df.count()}==================================================================\n')
 
 facts_aankomst_df.show()
 
