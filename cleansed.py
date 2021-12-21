@@ -40,7 +40,7 @@ airport_schema = StructType([
 ])
 
 airport_df = spark.read.csv(
-    DATADIR + "export_luchthavens.txt", 
+    DATADIR + "export_luchthavens.txt",
     header=True,
     sep="\t",
     multiLine=True,
@@ -61,7 +61,7 @@ banen_schema = StructType([
   ])
 
 banen_df = spark.read.csv(
-    DATADIR + "export_banen.csv", 
+    DATADIR + "export_banen.csv",
     header=True,
     sep=';',
     schema= banen_schema
@@ -81,7 +81,7 @@ customers_schema = StructType([
 ])
 
 customers_df = spark.read.csv(
-    DATADIR + "export_klant.csv", 
+    DATADIR + "export_klant.csv",
     header=True,
     sep=";",
     multiLine=True,
@@ -101,7 +101,7 @@ maatschappijen_schema = StructType([
   ])
 
 maatschappijen_df = spark.read.csv(
-    DATADIR + "export_maatschappijen.txt", 
+    DATADIR + "export_maatschappijen.txt",
     header=True,
     sep='\t',
     schema=maatschappijen_schema
@@ -147,7 +147,7 @@ vliegtuig_type_schema = StructType([
   ])
 
 vliegtuig_type = spark.read.csv(
-    DATADIR + "export_vliegtuigtype.csv", 
+    DATADIR + "export_vliegtuigtype.csv",
     header=True,
     sep=';',
     schema=vliegtuig_type_schema
@@ -167,7 +167,7 @@ vliegtuig_schema = StructType([
   ])
 
 vliegtuig_df = spark.read.csv(
-    DATADIR + "export_vliegtuig.txt", 
+    DATADIR + "export_vliegtuig.txt",
     header=True,
     sep='\t',
     schema=vliegtuig_schema
@@ -189,7 +189,7 @@ vlucht_schema = StructType([
   ])
 
 vlucht_df = spark.read.csv(
-    DATADIR + "export_vlucht.txt", 
+    DATADIR + "export_vlucht.txt",
     header=True,
     sep='\t',
     schema=vlucht_schema
@@ -246,7 +246,7 @@ weather_schema = StructType([
 ])
 
 weather_df = spark.read.csv(
-    DATADIR + "export_weer.txt", 
+    DATADIR + "export_weer.txt",
     header=True,
     sep="\t",
     multiLine=True,

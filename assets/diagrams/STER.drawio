@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="vYY0wZgh9Mw6Mro5w5tX" name="Page-1">
-        <mxGraphModel dx="1671" dy="1998" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1929" dy="1923" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -40,7 +40,7 @@
                 <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-10" value="-vliegtuigID&#10;-airlineCode&#10;-vliegtuigCode&#10;-vliegtuigTypeID&#10;-bouwJaar" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="Fw4iVVHJRfLlpQ4vOzXV-9" vertex="1">
                     <mxGeometry y="30" width="160" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Fw4iVVHJRfLlpQ4vOzXV-11" target="Fw4iVVHJRfLlpQ4vOzXV-10">
+                <mxCell id="4" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="Fw4iVVHJRfLlpQ4vOzXV-11" target="Fw4iVVHJRfLlpQ4vOzXV-10" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-11" value="dim_vliegtuigtype" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
@@ -70,13 +70,13 @@
                 <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-18" value="fact_vertrek" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
                     <mxGeometry x="140" y="400" width="160" height="290" as="geometry"/>
                 </mxCell>
-                <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-19" value="-vluchtID&#10;-planningID&#10;-luchthavenID&#10;-weerID&#10;-maatschappijID&#10;-vliegtuigID&#10;-vliegtuigTypeID&#10;-baanNr&#10;-vluchtNr&#10;-terminal&#10;-gate&#10;-bezetting&#10;-vracht&#10;-vertrektijd&#10;-ratingID&#10;-datum" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="Fw4iVVHJRfLlpQ4vOzXV-18" vertex="1">
+                <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-19" value="-vluchtID&#10;-planningID&#10;-luchthavenID&#10;-weerID&#10;-maatschappijID&#10;-vliegtuigID&#10;-vliegtuigTypeID&#10;-baanNr&#10;-vluchtNr&#10;-terminal&#10;-gate&#10;-bezetting&#10;-vracht&#10;-vertrektijd&#10;-ratingID&#10;-datum&#10;-vertraging" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="Fw4iVVHJRfLlpQ4vOzXV-18" vertex="1">
                     <mxGeometry y="30" width="160" height="260" as="geometry"/>
                 </mxCell>
                 <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-20" value="fact_aankomst" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
                     <mxGeometry x="140" y="-130" width="160" height="290" as="geometry"/>
                 </mxCell>
-                <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-21" value="-vluchtID&#10;-planningID&#10;-luchthavenID&#10;-weerID&#10;-maatschappijID&#10;-vliegtuigID&#10;-vliegtuigTypeID&#10;-baanNr&#10;-vluchtNr&#10;-terminal&#10;-gate&#10;-bezetting&#10;-vracht&#10;-vertrektijd&#10;-datum" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="Fw4iVVHJRfLlpQ4vOzXV-20" vertex="1">
+                <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-21" value="-vluchtID&#10;-planningID&#10;-luchthavenID&#10;-weerID&#10;-maatschappijID&#10;-vliegtuigID&#10;-vliegtuigTypeID&#10;-baanNr&#10;-vluchtNr&#10;-terminal&#10;-gate&#10;-bezetting&#10;-vracht&#10;-vertrektijd&#10;-datum&#10;-vertraging" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="Fw4iVVHJRfLlpQ4vOzXV-20" vertex="1">
                     <mxGeometry y="30" width="160" height="260" as="geometry"/>
                 </mxCell>
                 <mxCell id="Fw4iVVHJRfLlpQ4vOzXV-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Fw4iVVHJRfLlpQ4vOzXV-8" target="Fw4iVVHJRfLlpQ4vOzXV-18" edge="1">
@@ -115,7 +115,7 @@
                 <mxCell id="MCywyoQNHAXix00B3p6v-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="MCywyoQNHAXix00B3p6v-2" target="Fw4iVVHJRfLlpQ4vOzXV-17" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.308;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="MCywyoQNHAXix00B3p6v-4" target="Fw4iVVHJRfLlpQ4vOzXV-19">
+                <mxCell id="2" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.308;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="MCywyoQNHAXix00B3p6v-4" target="Fw4iVVHJRfLlpQ4vOzXV-19" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
             </root>
