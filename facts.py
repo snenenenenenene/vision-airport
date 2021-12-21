@@ -1,3 +1,4 @@
+from logging import setLoggerClass
 import os
 
 import pyspark.sql.functions as F
@@ -54,7 +55,6 @@ dim_luchthaven_df = spark.read.csv(
     schema=dim_luchthaven_schema
 )
 
-
 # Banen ==================================================================================================
 
 dim_banen_schema = StructType([
@@ -89,7 +89,6 @@ dim_klanten_df = spark.read.csv(
     schema=dim_klanten_schema
 )
 
-
 # Maatschappij ===========================================================================================
 
 dim_maatschappijen_schema = StructType([
@@ -108,7 +107,7 @@ dim_maatschappijen_df = spark.read.csv(
 # Planning ===============================================================================================
 
 dim_planning_schema = StructType([
-    StructField("Vluchtnr", StringType(), False),
+    StructField("vluchtnr", StringType(), False),
     StructField("Airlinecode", StringType(), True),
     StructField("Destcode", StringType(), True),
     StructField("Planterminal", StringType(), True),
@@ -124,6 +123,7 @@ dim_planning_df = spark.read.csv(
 )
 
 dim_planning_df = dim_planning_df.withColumn('Plantijd',F.date_format(F.to_timestamp("Plantijd", "hh:mm a"), "HH:MM:SS"))
+
 
 # Vliegtuig ==============================================================================================
 
@@ -161,7 +161,6 @@ dim_vliegtuig_df = spark.read.csv(
 
 dim_vliegtuig_df = dim_vliegtuig_df\
     .join(dim_vliegtuig_type_df, dim_vliegtuig_df.Vliegtuigtype == dim_vliegtuig_type_df.IATA)\
-    .drop("Vliegtuigtype")
 
 # Vlucht =================================================================================================
 
@@ -236,7 +235,7 @@ dim_weather_df = dim_weather_df.select("date", "FHVEC", "TG", "RH", "VVX")\
         .withColumnRenamed("TG", "temp_gem")\
         .withColumnRenamed("RH", "neerslag_som")\
         .withColumnRenamed("VVX", "opgetreden_zicht_max")
-        
+
 # FACTS ===========================================================================================
 
 # Vertrek =========================================================================================
@@ -259,21 +258,27 @@ facts_vertrek_df = spark.read.csv(
     schema=facts_vertrek_schema
 )
 
+print(f'\nVERTREK BEFORE {facts_vertrek_df.count()}==================================================================\n')
+
 facts_vertrek_df = facts_vertrek_df\
-    .join(dim_vlucht_df, facts_vertrek_df.vluchtid == dim_vlucht_df.Vluchtid).drop("Vluchtid", "Airlinecode")\
-    .join(dim_klanten_df, facts_vertrek_df.vluchtid == dim_klanten_df.id).drop("id")\
+    .join(dim_vlucht_df, facts_vertrek_df.vluchtid == dim_vlucht_df.Vluchtid).drop("Vluchtid", "Destcode")\
+    .join(dim_klanten_df, facts_vertrek_df.vluchtid == dim_klanten_df.id, "fullouter").drop("id")\
     .join(dim_banen_df, facts_vertrek_df.baan == dim_banen_df.Baannummer).drop("Baannummer")
 
 facts_vertrek_df = facts_vertrek_df\
-    .join(dim_planning_df, facts_vertrek_df.Vluchtnr == dim_planning_df.Vluchtnr).drop("Vluchtnr", "Destcode")\
-    .join(dim_vliegtuig_df, facts_vertrek_df.vliegtuigcode == dim_vliegtuig_df.Vliegtuigcode).drop("Vliegtuigcode", "Airlinecode")\
+    .join(dim_planning_df, facts_vertrek_df.Vluchtnr == dim_planning_df.vluchtnr, "fullouter").drop("vluchtnr", "Airlinecode")\
+    .join(dim_vliegtuig_df, facts_vertrek_df.vliegtuigcode == dim_vliegtuig_df.Vliegtuigcode).drop("Vliegtuigcode")\
     .join(dim_weather_df, facts_vertrek_df.Datum == dim_weather_df.date).drop("date")
 
-facts_vertrek_df.show()
+facts_vertrek_df = facts_vertrek_df\
+    .join(dim_luchthaven_df, facts_vertrek_df.Destcode == dim_luchthaven_df.IATA).drop("IATA", "ICAO")
 
 
+print(f'\nVERTREK AFTER {facts_vertrek_df.count()}==================================================================\n')
 
 def getVertraging(actual, planned):
+    if actual is None or planned is None:
+        return None
     planned = datetime.strptime(planned, "%H:%M:%S").time()
     actual = actual.time()
     return (actual.hour - planned.hour)*60 + (actual.minute - planned.minute)
@@ -281,6 +286,8 @@ def getVertraging(actual, planned):
 vertraging = F.udf(lambda x, y: getVertraging(x, y), IntegerType())
 
 facts_vertrek_df = facts_vertrek_df.withColumn("vertraging_min", vertraging(F.col("vertrektijd"), F.col("Plantijd")))
+
+facts_vertrek_df.show()
 
 facts_vertrek_df.write\
     .mode("overwrite")\
@@ -306,20 +313,29 @@ facts_aankomst_df = spark.read.csv(
     schema=facts_aankomst_schema
 )
 
+
+print(f'\n AANKOMST BEFORE {facts_vertrek_df.count()}==================================================================\n')
+
 facts_aankomst_df = facts_aankomst_df.dropna(subset="aankomsttijd")
 facts_aankomst_df = facts_aankomst_df\
-    .join(dim_vlucht_df, facts_aankomst_df.vluchtid == dim_vlucht_df.Vluchtid).drop("Vluchtid", "Airlinecode")\
+    .join(dim_vlucht_df, facts_aankomst_df.vluchtid == dim_vlucht_df.Vluchtid).drop("Vluchtid", "Destcode")\
     .join(dim_banen_df, facts_aankomst_df.baan == dim_banen_df.Baannummer).drop("Baannummer")
 
 facts_aankomst_df = facts_aankomst_df\
-    .join(dim_planning_df, facts_aankomst_df.Vluchtnr == dim_planning_df.Vluchtnr).drop("Vluchtnr", "Destcode")\
-    .join(dim_vliegtuig_df, facts_aankomst_df.vliegtuigcode == dim_vliegtuig_df.Vliegtuigcode).drop("Vliegtuigcode", "Airlinecode")\
-    .join(dim_weather_df, facts_aankomst_df.Datum == dim_weather_df.date).drop("date")
+    .join(dim_planning_df, facts_aankomst_df.Vluchtnr == dim_planning_df.vluchtnr, "fullouter").drop("vluchtnr", "Airlinecode")\
+    .join(dim_vliegtuig_df, facts_aankomst_df.vliegtuigcode == dim_vliegtuig_df.Vliegtuigcode, "fullouter").drop("Vliegtuigcode")\
+    .join(dim_weather_df, facts_aankomst_df.Datum == dim_weather_df.date, "fullouter").drop("date")
 
-facts_aankomst_df = facts_aankomst_df.dropna(subset="Plantijd")
+facts_aankomst_df = facts_aankomst_df\
+    .join(dim_luchthaven_df, facts_aankomst_df.Destcode == dim_luchthaven_df.IATA).drop("IATA", "ICAO")
+
+
 facts_aankomst_df = facts_aankomst_df.withColumn("vertraging_min", vertraging(F.col("aankomsttijd"), F.col("Plantijd")))
 
 
+print(f'\n AANKOMST AFTER {facts_vertrek_df.count()}==================================================================\n')
+
+facts_aankomst_df.show()
 
 facts_aankomst_df.write\
     .mode("overwrite")\
